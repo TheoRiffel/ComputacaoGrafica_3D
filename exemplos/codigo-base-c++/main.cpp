@@ -168,8 +168,6 @@ int main(void){
 
     }
 
-    
-
     // Compilando o Fragment Shader e verificando erros
     glCompileShader(fragment);
 
@@ -218,7 +216,7 @@ int main(void){
 
     std::vector<texture_info> textures; //Vetor auxiliar de informacoes de texturas usadas na malha
 
-    //Criacao do modelo da malha de cabana com suas respectivas texturas
+    // Criacao do modelo da malha de cabana com suas respectivas texturas
     // textures.push_back({"cabana/WoodCabinDif.jpg",GL_RGB});
     // textures.push_back({"cabana/WoodCabinDif.jpg",GL_RGB});
     // mesh cabana(program, "cabana/cabana.obj", textures, v_vertices, v_normals, v_uvs);
@@ -229,14 +227,18 @@ int main(void){
     mesh terreno1(program, "terreno/terreno.obj", textures, v_vertices, v_normals, v_uvs);
     textures.clear();
 
-    textures.push_back({"gato/Cat_diffuse.jpg", GL_RGB});
-    mesh gatinho(program, "gato/gatinho.obj", textures, v_vertices, v_normals, v_uvs);
-    textures.clear();
-
-    // textures.push_back({"objetos/grama/grama_diff.jpg", GL_RGB});
-    // mesh graminha(program, "objetos/grama/grama.obj", textures, v_vertices, v_normals, v_uvs);
+    // textures.push_back({"gato/Cat_diffuse.jpg", GL_RGB});
+    // textures.push_back({"gato/Cat_bump.jpg", GL_RGB});
+    // mesh gatinho(program, "gato/gatinho.obj", textures, v_vertices, v_normals, v_uvs);
     // textures.clear();
 
+    // textures.push_back({"terreno/pedras.jpg", GL_RGB});
+    // mesh sofa(program, "objetos/dragao.obj", textures, v_vertices, v_normals, v_uvs);
+    // textures.clear();
+
+    textures.push_back({"objetos/casa/casa.jpg", GL_RGB});
+    mesh casa(program, "objetos/casa/casa.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
 
     //Envia o vetor de coordenadas dos vertices do cenario para a GPU
     glBufferData(GL_ARRAY_BUFFER, v_vertices.size() * sizeof(glm::vec3), &v_vertices[0], GL_STATIC_DRAW);
@@ -315,9 +317,13 @@ int main(void){
         // cabana.scale(0.1f,0.1f,0.1f);
         // cabana.update();
 
-        gatinho.scale(0.005f, 0.005f, 0.005f);
-        gatinho.translate(1.0f, 1.0f, 1.0f);
-        gatinho.update();
+        casa.scale(0.5f, 0.5f, 0.5f);
+        casa.translate(0.0f, 0.0f, 1.0f);
+        casa.update();
+
+        // gatinho.scale(0.05f, 0.05f, 0.05f);
+        // gatinho.translate(0.5f, 0.5f, 0.5f);
+        // gatinho.update();
 
         terreno1.scale(15.0f,15.0f,15.0f);
         terreno1.update();
