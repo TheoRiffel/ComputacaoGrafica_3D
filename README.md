@@ -1,10 +1,11 @@
-# ComputacaoGrafica_3D
+# SCC0250 - Computação Gráfica (2022)
+# Trabalho 2 - Computação Gráfica 3D 
 
-Trabalho 2 Computação Gráfica
-
-Grupo:
+## Grupo
 Lucas Pacheco
+
 Pedro Batista
+
 Théo Riffel
 
-Instruções para compilar e rodar:
+## Instruções para compilar e rodar
