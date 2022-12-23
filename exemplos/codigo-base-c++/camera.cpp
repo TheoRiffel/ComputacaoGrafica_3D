@@ -11,7 +11,7 @@ camera::camera(GLuint program, glm::vec3 pos, glm::vec3 front, glm::vec3 up, flo
     this->near = near;
     this->far = far;
     this->freeCamera = freeCamera;
-    this->speed = 3.5f;
+    this->speed = 10.0f;
     this->sensibility = 2.5f;
 }
 

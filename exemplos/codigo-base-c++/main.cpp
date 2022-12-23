@@ -217,28 +217,35 @@ int main(void){
     std::vector<texture_info> textures; //Vetor auxiliar de informacoes de texturas usadas na malha
 
     // Criacao do modelo da malha de cabana com suas respectivas texturas
-    // textures.push_back({"cabana/WoodCabinDif.jpg",GL_RGB});
-    // textures.push_back({"cabana/WoodCabinDif.jpg",GL_RGB});
-    // mesh cabana(program, "cabana/cabana.obj", textures, v_vertices, v_normals, v_uvs);
-    // textures.clear();
+    textures.push_back({"cabana/WoodCabinDif.jpg",GL_RGB});
+    textures.push_back({"cabana/WoodCabinDif.jpg",GL_RGB});
+    mesh cabana(program, "cabana/cabana.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
 
     //Criacao do modelo da malha do terreno externo de areia com sua respectiva textura
     textures.push_back({"terreno/areia.jpg", GL_RGB});
     mesh terreno1(program, "terreno/terreno.obj", textures, v_vertices, v_normals, v_uvs);
     textures.clear();
 
-    // textures.push_back({"gato/Cat_diffuse.jpg", GL_RGB});
-    // textures.push_back({"gato/Cat_bump.jpg", GL_RGB});
-    // mesh gatinho(program, "gato/gatinho.obj", textures, v_vertices, v_normals, v_uvs);
-    // textures.clear();
-
-    // textures.push_back({"terreno/pedras.jpg", GL_RGB});
-    // mesh sofa(program, "objetos/dragao.obj", textures, v_vertices, v_normals, v_uvs);
-    // textures.clear();
-
-    textures.push_back({"objetos/casa/casa.jpg", GL_RGB});
-    mesh casa(program, "objetos/casa/casa.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.push_back({"gato/Cat_diffuse.jpg", GL_RGB});
+    mesh gatinho(program, "gato/gatinho.obj", textures, v_vertices, v_normals, v_uvs);
     textures.clear();
+
+    textures.push_back({"terreno/pedras.jpg", GL_RGB});
+    mesh sofa(program, "objetos/sofa/couch.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
+
+    textures.push_back({"objetos/potinPlanta/indoor plant_2_COL.jpg", GL_RGB});
+    mesh potin(program, "objetos/potinPlanta/indoor plant_02.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
+
+    textures.push_back({"objetos/lua/Diffuse_2K.png", GL_RGB});
+    mesh lua(program, "objetos/lua/Moon 2K.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
+
+    // textures.push_back({"objetos/casa/casa.jpg", GL_RGB});
+    // mesh casa(program, "objetos/casa/casa.obj", textures, v_vertices, v_normals, v_uvs);
+    // textures.clear();
 
     //Envia o vetor de coordenadas dos vertices do cenario para a GPU
     glBufferData(GL_ARRAY_BUFFER, v_vertices.size() * sizeof(glm::vec3), &v_vertices[0], GL_STATIC_DRAW);
@@ -309,27 +316,39 @@ int main(void){
             D = false;
         }
 
-
         Cam.setFront(cameraFront);  //set para onde a camera deve olhar, calculado pela funcao de leitura do mouse
         Cam.update();               //atualiza e manda os valores das matrizes calculadas pelo objeto de camera para a GPU (VIEW e PROJECTION)
 
         //Posicionamento dos modelos no cenario e desenha cada objeto
-        // cabana.scale(0.1f,0.1f,0.1f);
-        // cabana.update();
 
-        casa.scale(0.5f, 0.5f, 0.5f);
-        casa.translate(0.0f, 0.0f, 1.0f);
-        casa.update();
-
-        // gatinho.scale(0.05f, 0.05f, 0.05f);
-        // gatinho.translate(0.5f, 0.5f, 0.5f);
-        // gatinho.update();
-
-        terreno1.scale(15.0f,15.0f,15.0f);
+        terreno1.scale(40.0f,40.0f,40.0f);
         terreno1.update();
 
+        cabana.scale(0.1f,0.1f,0.1f);
+        cabana.update();
+
+        gatinho.scale(0.02f, 0.02f, 0.02f);
+        gatinho.translate(0.0f, 25.0f, 20.0f);
+        gatinho.rotate(-90, X);
+        gatinho.rotate(45, Z);
+        gatinho.update();
+
+        potin.scale(0.2f, 0.2f, 0.2f);
+        potin.translate(9.0f, 3.0f, -12.0f);
+        potin.update();
+
+        sofa.scale(0.002f, 0.002f, 0.002f);
+        sofa.translate(-600.0f, 280.0f, 800.0f);
+        sofa.rotate(90, Y);
+        sofa.update();
+
+        lua.scale(1.0f, 1.0f, 1.0f);
+        lua.translate(30.0f, 15.0f, -30.0f);
+        lua.update();
+
+
+
         glfwSwapBuffers(window);
-        
     }
 
     glfwDestroyWindow(window);

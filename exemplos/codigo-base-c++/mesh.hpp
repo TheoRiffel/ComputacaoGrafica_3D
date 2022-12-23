@@ -47,4 +47,38 @@ class mesh{
         void update();
 };
 
+class CubemapTexture
+{
+public:
+
+    CubemapTexture(const string& Filename);
+
+    ~CubemapTexture();
+
+    bool Load();
+
+    void Bind(GLenum TextureUnit);
+
+private:
+
+    string m_fileNames[6];
+    GLuint m_textureObj;
+};
+
+class SkyboxTechnique : public Technique {
+public:
+
+    SkyboxTechnique();
+
+    virtual bool Init();
+
+    void SetWVP(const Matrix4f& WVP);
+    void SetTextureUnit(unsigned int TextureUnit);
+
+private:
+
+    GLuint m_WVPLocation;
+    GLuint m_textureLocation;
+};
+
 #endif
