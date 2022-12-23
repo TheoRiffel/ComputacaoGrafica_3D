@@ -10,7 +10,7 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
-
+#include <math.h>
 #include "camera.hpp"
 #include "mesh.hpp"
 
@@ -227,6 +227,10 @@ int main(void){
     mesh terreno1(program, "terreno/terreno.obj", textures, v_vertices, v_normals, v_uvs);
     textures.clear();
 
+    textures.push_back({"terreno/grama.jpg", GL_RGB});
+    mesh terreno2(program, "terreno/terreno.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
+
     textures.push_back({"gato/Cat_diffuse.jpg", GL_RGB});
     mesh gatinho(program, "gato/gatinho.obj", textures, v_vertices, v_normals, v_uvs);
     textures.clear();
@@ -243,9 +247,13 @@ int main(void){
     mesh lua(program, "objetos/lua/Moon 2K.obj", textures, v_vertices, v_normals, v_uvs);
     textures.clear();
 
-    // textures.push_back({"objetos/casa/casa.jpg", GL_RGB});
-    // mesh casa(program, "objetos/casa/casa.obj", textures, v_vertices, v_normals, v_uvs);
-    // textures.clear();
+    textures.push_back({"terreno/noite_estrelada.jpg", GL_RGB});
+    mesh ceu(program, "terreno/terreno.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
+
+    textures.push_back({"objetos/caveira/caveira.jpg", GL_RGB});
+    mesh caveira(program, "objetos/caveira/caveira.obj", textures, v_vertices, v_normals, v_uvs);
+    textures.clear();
 
     //Envia o vetor de coordenadas dos vertices do cenario para a GPU
     glBufferData(GL_ARRAY_BUFFER, v_vertices.size() * sizeof(glm::vec3), &v_vertices[0], GL_STATIC_DRAW);
@@ -277,8 +285,12 @@ int main(void){
     float angle = 0;            //Angulo responsavel pela movimentacao em circulos do modelo do cachorro
     float angle_inc = 0.5;      
 
+    float theta = 0;
+    int radius = 100;
+
     while (!glfwWindowShouldClose(window) && !stop)
     {   
+
         glfwPollEvents();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(1.0, 1.0, 1.0, 1.0);
@@ -324,6 +336,10 @@ int main(void){
         terreno1.scale(40.0f,40.0f,40.0f);
         terreno1.update();
 
+        terreno2.scale(10.0f,10.0f,10.0f);
+        terreno2.translate(0.0f, 0.001f, 0.0f);
+        terreno2.update();
+
         cabana.scale(0.1f,0.1f,0.1f);
         cabana.update();
 
@@ -346,7 +362,39 @@ int main(void){
         lua.translate(30.0f, 15.0f, -30.0f);
         lua.update();
 
+        ceu.scale(40.0f,40.0f,40.0f);
+        ceu.rotate(90, Z);
+        ceu.translate(0.0f, 1.0f, 0.0f);
+        ceu.update();
 
+        ceu.scale(40.0f,40.0f,40.0f);
+        ceu.rotate(90, Z);
+        ceu.translate(0.0f, -1.0f, 0.0f);
+        ceu.update();
+
+        ceu.scale(40.0f,40.0f,40.0f);
+        ceu.rotate(90, Y);
+        ceu.translate(0.0f, 1.0f, 0.0f);
+        ceu.update();
+
+        ceu.scale(40.0f,40.0f,40.0f);
+        ceu.rotate(90, X);
+        ceu.translate(0.0f, 1.0f, 0.0f);
+        ceu.update();
+
+        ceu.scale(40.0f,40.0f,40.0f);
+        ceu.rotate(90, X);
+        ceu.translate(0.0f, -1.0f, 0.0f);
+        ceu.update();
+
+        theta += (2 * M_PI)/(1000);
+        int newX = cos(theta) * radius, newY = sin(theta) * radius;
+
+        caveira.scale(0.1f, 0.1f, 0.1f);
+        caveira.rotate(-90, X);
+        caveira.rotate(-theta * (180/M_PI), Z);
+        caveira.translate(100, 0, 0.0f);
+        caveira.update();
 
         glfwSwapBuffers(window);
     }

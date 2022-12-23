@@ -47,38 +47,38 @@ class mesh{
         void update();
 };
 
-class CubemapTexture
-{
-public:
+// class CubemapTexture
+// {
+// public:
 
-    CubemapTexture(const string& Filename);
+//     CubemapTexture(const string& Filename);
 
-    ~CubemapTexture();
+//     ~CubemapTexture();
 
-    bool Load();
+//     bool Load();
 
-    void Bind(GLenum TextureUnit);
+//     void Bind(GLenum TextureUnit);
 
-private:
+// private:
 
-    string m_fileNames[6];
-    GLuint m_textureObj;
-};
+//     string m_fileNames[6];
+//     GLuint m_textureObj;
+// };
 
-class SkyboxTechnique : public Technique {
-public:
+// class SkyboxTechnique : public Technique {
+// public:
 
-    SkyboxTechnique();
+//     SkyboxTechnique();
 
-    virtual bool Init();
+//     virtual bool Init();
 
-    void SetWVP(const Matrix4f& WVP);
-    void SetTextureUnit(unsigned int TextureUnit);
+//     void SetWVP(const Matrix4f& WVP);
+//     void SetTextureUnit(unsigned int TextureUnit);
 
-private:
+// private:
 
-    GLuint m_WVPLocation;
-    GLuint m_textureLocation;
-};
+//     GLuint m_WVPLocation;
+//     GLuint m_textureLocation;
+// };
 
 #endif
